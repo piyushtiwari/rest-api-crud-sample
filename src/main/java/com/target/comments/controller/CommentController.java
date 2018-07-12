@@ -6,6 +6,8 @@ import java.util.List;
 import com.sun.tools.javap.TypeAnnotationWriter;
 import com.target.comments.exception.ResourceNotFoundException;
 import com.target.comments.model.Comment;
+import com.target.comments.model.Product;
+import com.target.comments.model.User;
 import com.target.comments.repository.CommentRepository;
 import com.target.comments.repository.ProductRepository;
 import com.target.comments.repository.UserRepository;
@@ -27,8 +29,12 @@ public class CommentController {
     ProductRepository productRepository;
 
     @PostMapping("/product/{productId}/comment")
-    public Comment createComment(@Valid @RequestBody Comment comment) {
+    public Comment createComment(@PathVariable (value = "productId") Long productId, @Valid @RequestBody Comment comment) {
+        Product product = productRepository.findById(productId).isPresent() ? productRepository.findById(productId).get():null;
+        comment.setProduct(product);
 
+        long userId = 1;
+        User user = userRepository.findById(userId).isPresent()? userRepository.findById(userId).get():null;
         return commentRepository.save(comment);
     }
 
@@ -58,5 +64,10 @@ public class CommentController {
     @GetMapping("/comment")
     public List<Comment> getAllComments() {
         return commentRepository.findAll();
+    }
+
+    @PutMapping
+    public void moderateComment() {
+
     }
 }

@@ -66,8 +66,15 @@ public class CommentController {
         return commentRepository.findAll();
     }
 
-    @PutMapping
+    @PutMapping("/comment/{id}/moderate")
     public void moderateComment() {
+        /*
+         Call a comment-moderation service. It should have some static logic like checking the if the comment Text
+         has some stop(abusive) words.
+
+         We can also integrate it with some external self learning system like wit.ai, that can be trained to
+         evaluate if a Comment is objectional or not
+          */
 
     }
 }

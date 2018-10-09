@@ -73,7 +73,7 @@ public class CommentController {
          has some stop(abusive) words.
 
          We can also integrate it with some external self learning system like wit.ai, that can be trained to
-         evaluate if a Comment is objectional or not
+         evaluate if a Comment is objectionable or not
           */
 
     }
